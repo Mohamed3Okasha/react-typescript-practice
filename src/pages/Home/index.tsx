@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { tableRow } from "../models/tableRow";
-import { getValue } from "./../utilities/getValue";
+import { tableRow } from "../../types/tableRow";
+import { getValue } from "../../components/Table/getValue";
+import FilterModal from "./../../components/Filter/FilterModal";
+import CustomizeDisplayModal from "./../../components/CustomizeDisplay/CustomizeDisplayModal";
 
-export function Route1() {
+export function Home() {
   const [columns, setColums] = useState<string[]>(["name", "age", "major"]);
   const [data, setData] = useState<tableRow[]>([
     { id: 1, name: "Ahmed", age: 25, major: "SE", checked: false },
@@ -40,15 +42,27 @@ export function Route1() {
     <>
       <div className="container mt-5">
         <div className="d-flex justify-content-end mb-3">
-          <button type="button" className="btn btn-primary">
+          <button
+            type="button"
+            className="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#filterModal"
+          >
             Filter
           </button>
-          <button type="button" className="btn btn-secondary ms-2">
+          <FilterModal />
+          <button
+            type="button"
+            className="btn btn-secondary ms-2"
+            data-bs-toggle="modal"
+            data-bs-target="#customizeDisplayModal"
+          >
             Customize Display
           </button>
+          <CustomizeDisplayModal />
         </div>
-        <div className="row no-gutters">
-          <div className="col col-sm-12 row no-gutters">
+        <div className="row no-gutters justify-content-center">
+          <div className="col-3 col-sm-12 row no-gutters">
             <div className="d-none d-sm-block col-sm-1 text-white bg-dark m-1">
               <input
                 type="checkbox"
@@ -63,7 +77,7 @@ export function Route1() {
             ))}
           </div>
           {data.map((row) => (
-            <div key={row.id} className="col col-sm-12 row no-gutters">
+            <div key={row.id} className="col-3 col-sm-12 row no-gutters">
               <div className="d-none d-sm-block col-sm-1 bg-light m-1">
                 <input
                   type="checkbox"
