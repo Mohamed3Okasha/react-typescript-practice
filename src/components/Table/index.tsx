@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { tableRow } from "../../types/tableRow";
 import { getValue } from "./getValue";
 
-export function Table() {
-  const [columns, setColums] = useState<string[]>(["name", "age", "major"]);
-  const [data, setData] = useState<tableRow[]>([
-    { id: 1, name: "Ahmed", age: 25, major: "SE", checked: false },
-    { id: 2, name: "Mohamed", age: 22, major: "SD", checked: false },
-    { id: 3, name: "Hammad", age: 27, major: "CS", checked: false },
-  ]);
+type TableProps = {
+  studentsData: tableRow[];
+  tableColumns: string[];
+};
+
+export function Table({ studentsData, tableColumns }: TableProps) {
+  const [columns, setColums] = useState<string[]>(tableColumns);
+  const [data, setData] = useState<tableRow[]>(studentsData);
 
   const [checkAll, setCheckAll] = useState(false);
 

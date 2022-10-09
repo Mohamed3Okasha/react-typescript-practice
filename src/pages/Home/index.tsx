@@ -1,6 +1,7 @@
 import FilterModal from "./../../components/Filter/FilterModal";
 import CustomizeDisplayModal from "./../../components/CustomizeDisplay/CustomizeDisplayModal";
 import { Table } from "../../components/Table";
+import { studentsData } from "./../../data/students";
 
 export function Home() {
   return (
@@ -26,7 +27,10 @@ export function Home() {
           </button>
           <CustomizeDisplayModal />
         </div>
-        <Table />
+        <Table
+          studentsData={studentsData}
+          tableColumns={["name", "age", "major"]}
+        />
       </div>
     </>
   );
