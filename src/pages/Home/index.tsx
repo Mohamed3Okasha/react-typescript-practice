@@ -1,9 +1,17 @@
 import FilterModal from "./../../components/Filter/FilterModal";
 import CustomizeDisplayModal from "./../../components/CustomizeDisplay/CustomizeDisplayModal";
 import { Table } from "../../components/Table";
-import { studentsData } from "./../../data/students";
+import { useAppContext } from "../../context/AppContext";
 
 export function Home() {
+  const {
+    studentsData,
+    toggleRowCheck,
+    toggleRowCheckAll,
+    checkedAll,
+    tableColumns,
+  } = useAppContext();
+
   return (
     <>
       <div className="container mt-5">
@@ -29,7 +37,10 @@ export function Home() {
         </div>
         <Table
           studentsData={studentsData}
-          tableColumns={["name", "age", "major"]}
+          tableColumns={tableColumns}
+          toggleRowCheck={toggleRowCheck}
+          toggleRowCheckAll={toggleRowCheckAll}
+          checkedAll={checkedAll}
         />
       </div>
     </>
