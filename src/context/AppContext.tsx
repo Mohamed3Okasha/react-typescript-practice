@@ -13,6 +13,7 @@ type AppContextsVals = {
   toggleRowCheckAll: () => void;
   checkedAll: boolean;
   tableColumns: tableColumn[];
+  setTableColums: (localTableColumns: tableColumn[]) => void;
 };
 
 const AppContext = createContext({} as AppContextsVals);
@@ -47,6 +48,10 @@ export function AppContextProvider({ children }: AppProviderProps) {
     });
   };
 
+  const changeColumnsState = (localTableColumns: tableColumn[]) => {
+    setTableColums(localTableColumns);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -55,6 +60,7 @@ export function AppContextProvider({ children }: AppProviderProps) {
         toggleRowCheckAll,
         checkedAll,
         tableColumns,
+        setTableColums,
       }}
     >
       {children}

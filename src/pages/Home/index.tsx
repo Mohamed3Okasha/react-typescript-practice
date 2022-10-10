@@ -33,7 +33,7 @@ export function Home() {
           >
             Customize Display
           </button>
-          <CustomizeDisplayModal />
+          <CustomizeDisplayModal CustomizeTableColumns={tableColumns} />
         </div>
         <Table
           studentsData={studentsData}

@@ -1,6 +1,12 @@
 import { createPortal } from "react-dom";
+import { CustomizeDisplay } from ".";
+import { tableColumn } from "../../types/tableColumn";
 
-const ModalOverlay = (props: any) => {
+const ModalOverlay = ({
+  CustomizeTableColumns,
+}: {
+  CustomizeTableColumns: tableColumn[];
+}) => {
   return (
     <div
       className="modal fade"
@@ -23,19 +29,23 @@ const ModalOverlay = (props: any) => {
               aria-label="Close"
             ></button>
           </div>
-          <h1>Customize Display Modal</h1>
+          <CustomizeDisplay CustomizeTableColumns={CustomizeTableColumns} />
         </div>
       </div>
     </div>
   );
 };
 
-export default function CustomizeDisplayModal(props: any) {
+export default function CustomizeDisplayModal({
+  CustomizeTableColumns,
+}: {
+  CustomizeTableColumns: tableColumn[];
+}) {
   return (
     <>
       {createPortal(
         <>
-          <ModalOverlay />
+          <ModalOverlay CustomizeTableColumns={CustomizeTableColumns} />
         </>,
         document.getElementById("modal-root")!
       )}
