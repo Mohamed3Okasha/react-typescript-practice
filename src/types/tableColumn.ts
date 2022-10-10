@@ -1,3 +1,3 @@
 export type tableColumn = {
-  [key: string]: boolean | any;
+  [key: string]: boolean | undefined;
 };
