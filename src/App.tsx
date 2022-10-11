@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Navigate to="/route1" />} />
-        <Route path="/teachers" element={<Courses />} />
+        <Route path="/courses" element={<Courses />} />
       </Routes>
     </AppContextProvider>
   );
