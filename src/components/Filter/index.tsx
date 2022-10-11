@@ -16,10 +16,12 @@ export default function Filter({ filtersData, data, setData }: FilterProps) {
   );
 
   useEffect(() => {}, []);
-  const { studentsData, setStudentsData } = useAppContext();
 
   const handleApply = () => {
-    handleReset();
+    setData((prevData: any[]) =>
+      prevData.map((dataItem) => ({ ...dataItem, visible: true }))
+    );
+
     setData((prevData: any[]) => {
       let cloneData = [...prevData];
       filters.forEach((filter) => {
@@ -29,51 +31,20 @@ export default function Filter({ filtersData, data, setData }: FilterProps) {
             if (dataItem[filterKey] === filter[filterKey]) return;
             else {
               dataItem.visible = false;
-              return dataItem;
             }
           }
         });
       });
       return cloneData;
-      // const newArr = [...prevData];
-      // prevData.map((dataItem) => {
-      // let initialFilter = false;
-      // filters.forEach((filter) => {
-      //   const filterKey = Object.keys(filter)[0];
-      //   if (
-      //     filter.checked &&
-      //     getValue(filterKey, dataItem) === filter[filterKey]
-      //   ) {
-      //     initialFilter = true;
-      //     console.log(
-      //       filterKey,
-      //       "if",
-      //       cloneDataItem.name,
-      //       getValue(filterKey, dataItem),
-      //       filter[filterKey]
-      //       );
-      //       return;
-      //     } else {
-      //       console.log(
-      //         filterKey,
-      //         "else",
-      //         cloneDataItem.name,
-      //         getValue(filterKey, dataItem),
-      //         filter[filterKey]
-      //         );
-      //         cloneDataItem.visible = false;
-      //       }
-      //     });
-      //     return cloneDataItem;
-      //   }
-      // })
-      // return newArr;
     });
   };
 
   const handleReset = () => {
     setData((prevData: any[]) =>
       prevData.map((dataItem) => ({ ...dataItem, visible: true }))
+    );
+    setFilters((prevFilters) =>
+      prevFilters.map((filter) => ({ ...filter, checked: false }))
     );
   };
   const toggleFilterCheck = (index: number) => {
