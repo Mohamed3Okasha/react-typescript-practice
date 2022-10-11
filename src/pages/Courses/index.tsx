@@ -4,8 +4,12 @@ import { Table } from "../../components/Table";
 import { useAppContext } from "../../context/AppContext";
 
 export function Courses() {
-  const { studentsData, setStudentsData, studentTableColumns } =
-    useAppContext();
+  const {
+    coursesData,
+    setCoursesData,
+    courseTableColumns,
+    setCourseTableColums,
+  } = useAppContext();
 
   return (
     <>
@@ -19,7 +23,11 @@ export function Courses() {
           >
             Filter
           </button>
-          <FilterModal data={studentsData} setData={setStudentsData} />
+          <FilterModal
+            data={coursesData}
+            setData={setCoursesData}
+            filtersData={[{ hours: 10 }, { major: "SE" }]}
+          />
           <button
             type="button"
             className="btn btn-secondary ms-2"
@@ -28,12 +36,15 @@ export function Courses() {
           >
             Customize Display
           </button>
-          <CustomizeDisplayModal CustomizeTableColumns={studentTableColumns} />
+          <CustomizeDisplayModal
+            CustomizeTableColumns={courseTableColumns}
+            setColumns={setCourseTableColums}
+          />
         </div>
         <Table
-          studentsData={studentsData}
-          setStudentsData={setStudentsData}
-          tableColumns={studentTableColumns}
+          data={coursesData}
+          setData={setCoursesData}
+          tableColumns={courseTableColumns}
         />
       </div>
     </>

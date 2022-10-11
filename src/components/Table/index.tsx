@@ -1,25 +1,22 @@
 import React, { useState } from "react";
+import { courseTableRow } from "../../types/courseTableRow";
 import { tableColumn } from "../../types/tableColumn";
 import { tableRow } from "../../types/tableRow";
 import { getValue } from "./getValue";
 const { v4: uuidv4 } = require("uuid");
 
 type TableProps = {
-  studentsData: tableRow[];
-  setStudentsData: (studentsData: any) => void;
+  data: (tableRow | courseTableRow)[];
+  setData: (data: any) => void;
   tableColumns: tableColumn[];
 };
 
-export function Table({
-  studentsData,
-  setStudentsData,
-  tableColumns,
-}: TableProps) {
+export function Table({ data, setData, tableColumns }: TableProps) {
   const [checkedAll, setCheckedAll] = useState(false);
 
   const toggleRowCheck = (id: number) => {
-    setStudentsData((currData: tableRow[]) => {
-      return currData.map((row: tableRow) => {
+    setData((currData: any[]) => {
+      return currData.map((row: any) => {
         if (row.id === id) {
           return { ...row, checked: !row.checked };
         } else return row;
@@ -29,7 +26,7 @@ export function Table({
 
   const toggleRowCheckAll = () => {
     setCheckedAll((prevCheckAll) => !prevCheckAll);
-    setStudentsData((prevData: tableRow[]) => {
+    setData((prevData: tableRow[]) => {
       return prevData.map((row: tableRow) => {
         if (row.checked === checkedAll) return { ...row, checked: !checkedAll };
         else return row;
@@ -57,7 +54,7 @@ export function Table({
             );
         })}
       </div>
-      {studentsData.map((row) => {
+      {data.map((row) => {
         if (row.visible) {
           return (
             <div key={uuidv4()} className="col-3 col-sm-12 row no-gutters">

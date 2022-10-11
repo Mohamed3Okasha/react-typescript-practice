@@ -3,6 +3,7 @@ import { tableColumn } from "../types/tableColumn";
 import { tableRow } from "../types/tableRow";
 import { students, studentColumns } from "./../data/students";
 import { courses, courseColumns } from "./../data/courses";
+import { courseTableRow } from "../types/courseTableRow";
 
 type AppProviderProps = {
   children: ReactNode;
@@ -12,7 +13,11 @@ type AppContextsVals = {
   studentsData: tableRow[];
   setStudentsData: (studentsData: any) => void;
   studentTableColumns: tableColumn[];
-  setStudentTableColums: (localTableColumns: tableColumn[]) => void;
+  setStudentTableColums: (studentTableColumns: tableColumn[]) => void;
+  coursesData: courseTableRow[];
+  setCoursesData: (coursesData: any) => void;
+  courseTableColumns: tableColumn[];
+  setCourseTableColums: (courseTableColumns: tableColumn[]) => void;
 };
 
 const AppContext = createContext({} as AppContextsVals);
@@ -36,6 +41,10 @@ export function AppContextProvider({ children }: AppProviderProps) {
         setStudentsData,
         studentTableColumns,
         setStudentTableColums,
+        coursesData,
+        setCoursesData,
+        courseTableColumns,
+        setCourseTableColums,
       }}
     >
       {children}

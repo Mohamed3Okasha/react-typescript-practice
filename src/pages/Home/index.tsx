@@ -19,7 +19,11 @@ export function Home() {
           >
             Filter
           </button>
-          <FilterModal data={studentsData} setData={setStudentsData} />
+          <FilterModal
+            data={studentsData}
+            setData={setStudentsData}
+            filtersData={[{ age: 25 }, { major: "SE" }]}
+          />
           <button
             type="button"
             className="btn btn-secondary ms-2"
@@ -31,8 +35,8 @@ export function Home() {
           <CustomizeDisplayModal CustomizeTableColumns={studentTableColumns} />
         </div>
         <Table
-          studentsData={studentsData}
-          setStudentsData={setStudentsData}
+          data={studentsData}
+          setData={setStudentsData}
           tableColumns={studentTableColumns}
         />
       </div>
