@@ -9,7 +9,7 @@ function App() {
     <AppContextProvider>
       <Routes>
         <Route path="/home" element={<Home />} />
-        <Route path="/" element={<Navigate to="/route1" />} />
+        <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/courses" element={<Courses />} />
       </Routes>
     </AppContextProvider>
