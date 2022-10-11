@@ -1,6 +1,7 @@
 import { createPortal } from "react-dom";
+import Filter from ".";
 
-const ModalOverlay = (props: any) => {
+const ModalOverlay = ({ data, setData }: any) => {
   return (
     <div
       className="modal fade"
@@ -23,20 +24,24 @@ const ModalOverlay = (props: any) => {
               aria-label="Close"
             ></button>
           </div>
-          <h1>Filter Modal</h1>
+          <Filter
+            filtersData={[{ age: 25 }, { major: "SE" }]}
+            data={data}
+            setData={setData}
+          />
         </div>
       </div>
     </div>
   );
 };
 
-export default function FilterModal(props: any) {
+export default function FilterModal({ data, setData }: any) {
   return (
     <>
       {createPortal(
         <>
           {/* <Backdrop onClick={props.onConfirm} /> */}
-          <ModalOverlay />
+          <ModalOverlay data={data} setData={setData} />
         </>,
         document.getElementById("modal-root")!
       )}

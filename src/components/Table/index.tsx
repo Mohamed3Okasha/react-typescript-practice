@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { tableColumn } from "../../types/tableColumn";
 import { tableRow } from "../../types/tableRow";
 import { getValue } from "./getValue";
+const { v4: uuidv4 } = require("uuid");
 
 type TableProps = {
   studentsData: tableRow[];
@@ -38,26 +39,30 @@ export function Table({
             );
         })}
       </div>
-      {studentsData.map((row) => (
-        <div key={row.id} className="col-3 col-sm-12 row no-gutters">
-          <div className="d-none d-sm-block col-sm-1 bg-light m-1">
-            <input
-              type="checkbox"
-              checked={row.checked}
-              onChange={() => toggleRowCheck(row.id)}
-            />
-          </div>
-          {tableColumns.map((col) => {
-            const colKey = Object.keys(col)[0];
-            if (col[colKey])
-              return (
-                <div key={colKey + row.id} className="col-sm bg-light m-1">
-                  {getValue(colKey, row)}
-                </div>
-              );
-          })}
-        </div>
-      ))}
+      {studentsData.map((row) => {
+        if (row.visible) {
+          return (
+            <div key={uuidv4()} className="col-3 col-sm-12 row no-gutters">
+              <div className="d-none d-sm-block col-sm-1 bg-light m-1">
+                <input
+                  type="checkbox"
+                  checked={row.checked}
+                  onChange={() => toggleRowCheck(row.id)}
+                />
+              </div>
+              {tableColumns.map((col) => {
+                const colKey = Object.keys(col)[0];
+                if (col[colKey])
+                  return (
+                    <div key={colKey + row.id} className="col-sm bg-light m-1">
+                      {getValue(colKey, row)}
+                    </div>
+                  );
+              })}
+            </div>
+          );
+        }
+      })}
     </div>
   );
 }

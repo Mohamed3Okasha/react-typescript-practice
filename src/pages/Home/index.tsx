@@ -6,6 +6,7 @@ import { useAppContext } from "../../context/AppContext";
 export function Home() {
   const {
     studentsData,
+    setStudentsData,
     toggleRowCheck,
     toggleRowCheckAll,
     checkedAll,
@@ -24,7 +25,7 @@ export function Home() {
           >
             Filter
           </button>
-          <FilterModal />
+          <FilterModal data={studentsData} setData={setStudentsData} />
           <button
             type="button"
             className="btn btn-secondary ms-2"

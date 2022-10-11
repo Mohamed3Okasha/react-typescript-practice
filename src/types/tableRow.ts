@@ -4,4 +4,5 @@ export type tableRow = {
   age: number;
   major: string;
   checked: boolean;
+  visible: boolean;
 };

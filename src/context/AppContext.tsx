@@ -9,6 +9,7 @@ type AppProviderProps = {
 
 type AppContextsVals = {
   studentsData: tableRow[];
+  setStudentsData: (studentsData: any) => void;
   toggleRowCheck: (id: number) => void;
   toggleRowCheckAll: () => void;
   checkedAll: boolean;
@@ -26,7 +27,6 @@ export function AppContextProvider({ children }: AppProviderProps) {
   const [studentsData, setStudentsData] = useState(students);
   const [checkedAll, setCheckedAll] = useState(false);
   const [tableColumns, setTableColums] = useState<tableColumn[]>(columns);
-
   const toggleRowCheck = (id: number) => {
     setStudentsData((currData) => {
       return currData.map((row) => {
@@ -48,14 +48,11 @@ export function AppContextProvider({ children }: AppProviderProps) {
     });
   };
 
-  const changeColumnsState = (localTableColumns: tableColumn[]) => {
-    setTableColums(localTableColumns);
-  };
-
   return (
     <AppContext.Provider
       value={{
         studentsData,
+        setStudentsData,
         toggleRowCheck,
         toggleRowCheckAll,
         checkedAll,
