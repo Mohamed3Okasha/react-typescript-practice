@@ -6,19 +6,37 @@ const { v4: uuidv4 } = require("uuid");
 
 type TableProps = {
   studentsData: tableRow[];
+  setStudentsData: (studentsData: any) => void;
   tableColumns: tableColumn[];
-  toggleRowCheck: (id: number) => void;
-  toggleRowCheckAll: () => void;
-  checkedAll: boolean;
 };
 
 export function Table({
   studentsData,
+  setStudentsData,
   tableColumns,
-  toggleRowCheck,
-  toggleRowCheckAll,
-  checkedAll,
 }: TableProps) {
+  const [checkedAll, setCheckedAll] = useState(false);
+
+  const toggleRowCheck = (id: number) => {
+    setStudentsData((currData: tableRow[]) => {
+      return currData.map((row: tableRow) => {
+        if (row.id === id) {
+          return { ...row, checked: !row.checked };
+        } else return row;
+      });
+    });
+  };
+
+  const toggleRowCheckAll = () => {
+    setCheckedAll((prevCheckAll) => !prevCheckAll);
+    setStudentsData((prevData: tableRow[]) => {
+      return prevData.map((row: tableRow) => {
+        if (row.checked === checkedAll) return { ...row, checked: !checkedAll };
+        else return row;
+      });
+    });
+  };
+
   return (
     <div className="row no-gutters justify-content-center">
       <div className="col-3 col-sm-12 row no-gutters">

@@ -1,7 +1,8 @@
 import { createContext, useContext, ReactNode, useState } from "react";
 import { tableColumn } from "../types/tableColumn";
 import { tableRow } from "../types/tableRow";
-import { students, columns } from "./../data/students";
+import { students, studentColumns } from "./../data/students";
+import { courses, courseColumns } from "./../data/courses";
 
 type AppProviderProps = {
   children: ReactNode;
@@ -10,11 +11,8 @@ type AppProviderProps = {
 type AppContextsVals = {
   studentsData: tableRow[];
   setStudentsData: (studentsData: any) => void;
-  toggleRowCheck: (id: number) => void;
-  toggleRowCheckAll: () => void;
-  checkedAll: boolean;
-  tableColumns: tableColumn[];
-  setTableColums: (localTableColumns: tableColumn[]) => void;
+  studentTableColumns: tableColumn[];
+  setStudentTableColums: (localTableColumns: tableColumn[]) => void;
 };
 
 const AppContext = createContext({} as AppContextsVals);
@@ -25,39 +23,19 @@ export function useAppContext() {
 
 export function AppContextProvider({ children }: AppProviderProps) {
   const [studentsData, setStudentsData] = useState(students);
-  const [checkedAll, setCheckedAll] = useState(false);
-  const [tableColumns, setTableColums] = useState<tableColumn[]>(columns);
-  const toggleRowCheck = (id: number) => {
-    setStudentsData((currData) => {
-      return currData.map((row) => {
-        if (row.id === id) {
-          return { ...row, checked: !row.checked };
-        } else return row;
-      });
-    });
-  };
-
-  const toggleRowCheckAll = () => {
-    setCheckedAll((prevCheckAll) => !prevCheckAll);
-
-    setStudentsData((prevData) => {
-      return prevData.map((row) => {
-        if (row.checked === checkedAll) return { ...row, checked: !checkedAll };
-        else return row;
-      });
-    });
-  };
+  const [studentTableColumns, setStudentTableColums] =
+    useState<tableColumn[]>(studentColumns);
+  const [coursesData, setCoursesData] = useState(courses);
+  const [courseTableColumns, setCourseTableColums] =
+    useState<tableColumn[]>(courseColumns);
 
   return (
     <AppContext.Provider
       value={{
         studentsData,
         setStudentsData,
-        toggleRowCheck,
-        toggleRowCheckAll,
-        checkedAll,
-        tableColumns,
-        setTableColums,
+        studentTableColumns,
+        setStudentTableColums,
       }}
     >
       {children}

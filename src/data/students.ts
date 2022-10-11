@@ -18,4 +18,8 @@ export const students = [
   },
 ];
 
-export const columns = [{ name: true! }, { age: true! }, { major: true! }];
+export const studentColumns = [
+  { name: true! },
+  { age: true! },
+  { major: true! },
+];

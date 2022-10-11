@@ -4,14 +4,8 @@ import { Table } from "../../components/Table";
 import { useAppContext } from "../../context/AppContext";
 
 export function Home() {
-  const {
-    studentsData,
-    setStudentsData,
-    toggleRowCheck,
-    toggleRowCheckAll,
-    checkedAll,
-    tableColumns,
-  } = useAppContext();
+  const { studentsData, setStudentsData, studentTableColumns } =
+    useAppContext();
 
   return (
     <>
@@ -34,14 +28,12 @@ export function Home() {
           >
             Customize Display
           </button>
-          <CustomizeDisplayModal CustomizeTableColumns={tableColumns} />
+          <CustomizeDisplayModal CustomizeTableColumns={studentTableColumns} />
         </div>
         <Table
           studentsData={studentsData}
-          tableColumns={tableColumns}
-          toggleRowCheck={toggleRowCheck}
-          toggleRowCheckAll={toggleRowCheckAll}
-          checkedAll={checkedAll}
+          setStudentsData={setStudentsData}
+          tableColumns={studentTableColumns}
         />
       </div>
     </>

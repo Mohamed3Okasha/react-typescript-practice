@@ -6,7 +6,6 @@ const ModalOverlay = ({ data, setData }: any) => {
     <div
       className="modal fade"
       id="filterModal"
-      // tabIndex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
@@ -18,7 +17,6 @@ const ModalOverlay = ({ data, setData }: any) => {
             </h5>
             <button
               type="button"
-              // ref={closeLoginBtnRef}
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"

@@ -7,7 +7,7 @@ export function CustomizeDisplay({
 }: {
   CustomizeTableColumns: tableColumn[];
 }) {
-  const { tableColumns, setTableColums } = useAppContext();
+  const { studentTableColumns, setStudentTableColums } = useAppContext();
   const [localTableColumns, setLocalTableColumns] = useState(
     CustomizeTableColumns
   );
@@ -15,7 +15,7 @@ export function CustomizeDisplay({
   const CustomizeTableColumnsReset = [...CustomizeTableColumns];
 
   useEffect(() => {
-    setLocalTableColumns(tableColumns);
+    setLocalTableColumns(studentTableColumns);
   }, []);
 
   const moveColumnUp = (index: number) => {
@@ -41,7 +41,7 @@ export function CustomizeDisplay({
   };
 
   const handleApply = () => {
-    setTableColums(localTableColumns);
+    setStudentTableColums(localTableColumns);
   };
 
   const handleReset = () => {

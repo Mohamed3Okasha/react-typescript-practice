@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Home } from "./pages/Home/index";
-import { Teachers } from "./pages/Teachers/index";
+import { Courses } from "./pages/Courses/index";
 import { AppContextProvider } from "./context/AppContext";
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Navigate to="/route1" />} />
-        <Route path="/teachers" element={<Teachers />} />
+        <Route path="/teachers" element={<Courses />} />
       </Routes>
     </AppContextProvider>
   );

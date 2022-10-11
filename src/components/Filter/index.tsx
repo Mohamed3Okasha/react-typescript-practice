@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { filterType } from "../../types/filter";
 import { FilterItem } from "./FilterItem";
-import { useAppContext } from "./../../context/AppContext";
-import { getValue } from "./../Table/getValue";
 
 type FilterProps = {
   filtersData: filterType[];
@@ -48,7 +46,6 @@ export default function Filter({ filtersData, data, setData }: FilterProps) {
     );
   };
   const toggleFilterCheck = (index: number) => {
-    // setIsChecked((prevIsChecked) => !prevIsChecked);
     setFilters((prevFilters) =>
       prevFilters.map((filter, filterIndex) => {
         if (filterIndex === index)
