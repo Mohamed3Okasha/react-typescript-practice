@@ -17,7 +17,7 @@ export function FilterItem({
 
   return (
     <div key={filterKey} className="row mt-2 justify-content-center">
-      <div className="col-4">
+      <div className="col-6">
         <input
           type="checkbox"
           checked={filter.checked}
