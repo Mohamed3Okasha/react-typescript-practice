@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { filterType } from "../../types/filter";
 import { FilterItem } from "./FilterItem";
+import { useLocation } from "react-router-dom";
 
 type FilterProps = {
   filtersData: filterType[];
@@ -9,13 +10,26 @@ type FilterProps = {
 };
 
 export default function Filter({ filtersData, data, setData }: FilterProps) {
-  const [filters, setFilters] = useState<filterType[]>(() =>
-    filtersData.map((filter) => ({ ...filter, checked: false }))
-  );
+  const location = useLocation();
+  let localStorageItem =
+    location.pathname.slice(1) === "home"
+      ? "studentsFilters"
+      : "coursesFilters";
 
-  useEffect(() => {}, []);
+  const [filters, setFilters] = useState<filterType[]>(() => {
+    let storageFilters = localStorage.getItem(localStorageItem);
+    if (storageFilters) {
+      return JSON.parse(storageFilters);
+    } else return filtersData.map((filter) => ({ ...filter, checked: false }));
+  });
 
-  const handleApply = () => {
+  const [saveFilters, setSaveFilters] = useState(false);
+
+  useEffect(() => {
+    handleApplyUpdateState();
+  }, []);
+
+  const handleApplyUpdateState = () => {
     setData((prevData: any[]) =>
       prevData.map((dataItem) => ({ ...dataItem, visible: true }))
     );
@@ -36,6 +50,13 @@ export default function Filter({ filtersData, data, setData }: FilterProps) {
       return cloneData;
     });
   };
+  const handleApply = () => {
+    handleApplyUpdateState();
+
+    if (saveFilters) {
+      localStorage.setItem(localStorageItem, JSON.stringify(filters));
+    }
+  };
 
   const handleReset = () => {
     setData((prevData: any[]) =>
@@ -44,6 +65,8 @@ export default function Filter({ filtersData, data, setData }: FilterProps) {
     setFilters((prevFilters) =>
       prevFilters.map((filter) => ({ ...filter, checked: false }))
     );
+    setSaveFilters(false);
+    localStorage.removeItem(localStorageItem);
   };
   const toggleFilterCheck = (index: number) => {
     setFilters((prevFilters) =>
@@ -53,6 +76,10 @@ export default function Filter({ filtersData, data, setData }: FilterProps) {
         else return filter;
       })
     );
+  };
+
+  const toggleSaveFiltersCheck = () => {
+    setSaveFilters((prev) => !prev);
   };
 
   return (
@@ -68,6 +95,19 @@ export default function Filter({ filtersData, data, setData }: FilterProps) {
         );
       })}
       <div className="row mt-5 justify-content-center">
+        <div className="col-6">
+          <input
+            type="checkbox"
+            checked={saveFilters}
+            onChange={toggleSaveFiltersCheck}
+            id="saveLater"
+          />
+          <label htmlFor="saveLater" className="ms-1">
+            Save filter for later
+          </label>
+        </div>
+      </div>
+      <div className="row mt-3 justify-content-center">
         <button className="col-3 btn btn-warning me-2" onClick={handleReset}>
           Reset
         </button>
