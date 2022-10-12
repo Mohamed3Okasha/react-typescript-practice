@@ -4,8 +4,12 @@ import { Table } from "../../components/Table";
 import { useAppContext } from "../../context/AppContext";
 
 export function Home() {
-  const { studentsData, setStudentsData, studentTableColumns } =
-    useAppContext();
+  const {
+    studentsData,
+    setStudentsData,
+    studentTableColumns,
+    setStudentTableColums,
+  } = useAppContext();
 
   return (
     <>
@@ -32,7 +36,10 @@ export function Home() {
           >
             Customize Display
           </button>
-          <CustomizeDisplayModal CustomizeTableColumns={studentTableColumns} />
+          <CustomizeDisplayModal
+            CustomizeTableColumns={studentTableColumns}
+            setColumns={setStudentTableColums}
+          />
         </div>
         <Table
           data={studentsData}
